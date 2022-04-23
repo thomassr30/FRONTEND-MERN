@@ -7,15 +7,18 @@ export const usePost = () => {
     return context
 }
 
-export const PostContainer = ({children}) => {
+export const PostProvider = ({children}) => {
     
     const [post, setpost] = useState([])
-    console.log(post)
+
+    const getPost = () => {
+        
+    }
+    
     return(
         <postContext.Provider
             value={{
-                post,
-                setpost
+                post
             }}
         >
             {children}
