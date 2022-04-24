@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 const PostForm = () => {
 
-  const {createPost, getPostWithId} = usePost()
+  const {createPost, getPostWithId, updatePost} = usePost()
   const navigate = useNavigate()
   const params = useParams()
   const [post, setpost] = useState({
@@ -35,7 +35,13 @@ const PostForm = () => {
             description: Yup.string().required('La descripción es requerida')
           })}
           onSubmit={async (values, actions)=> {
-            await createPost(values)
+            
+            if(params.id){
+              await updatePost(params.id, values)
+            }else{
+              await createPost(values)
+            }
+
             navigate('/')
           }}
           enableReinitialize={true}

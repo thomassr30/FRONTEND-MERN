@@ -15,3 +15,7 @@ export const deletePostRequest = async (id) => {
 export const getPostWithIdRequest = async (id) => {
     return await axios.get(`http://localhost:4000/posts/${id}`)
 }
+
+export const updatePostRequest = async (id, newData) => {
+    return await axios.put(`http://localhost:4000/posts/${id}`, newData)
+}
