@@ -12,7 +12,8 @@ const PostForm = () => {
   const params = useParams()
   const [post, setpost] = useState({
     title: '',
-    description: ''
+    description: '',
+    image: null
   })
   
   useEffect(() => {
@@ -41,13 +42,13 @@ const PostForm = () => {
             }else{
               await createPost(values)
             }
-
+            actions.setSubmitting(false)
             navigate('/')
           }}
           enableReinitialize={true}
         >
           {
-            ({handleSubmit}) => (
+            ({handleSubmit, setFieldValue, isSubmitting}) => (
               <Form onSubmit={handleSubmit}>
                 <label htmlFor="title" className='text-sm block font-bold uppercase'>Titulo</label>
                 <Field name='title' placeholder="Titulo" 
@@ -60,9 +61,20 @@ const PostForm = () => {
                   text-gray-800 resize-none'
                   row={3}
                 />
+
+                <label htmlFor="image" className='text-sm block font-bold uppercase'>Imagen</label>
+                <input type="file" name='image' 
+                accept='.png, .jpg, .jpeg'
+                className='block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 
+                  file:rounded-full file:border-0 file:text-sm file:font-semibold 
+                  file:bg-primary file:text-white hover:file:bg-indigo-600 cursor-pointer mt-2' 
+                  required={true}
+                  onChange={(e) => setFieldValue('image',e.target.files[0])}
+                  />
                 <button
                   type='submit'
-                  className='btn btn-primary btn-block px-4 py-2 uppercase rounded-md text-white disabled:btn'
+                  className='btn btn-primary btn-block mt-4 px-4 py-2 uppercase rounded-md text-white disabled:btn'
+                  disabled={isSubmitting}
                 >
                   Guardar
                 </button>
