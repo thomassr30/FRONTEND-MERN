@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import PostCard from '../components/PostCard'
 import { usePost } from '../context/postContext'
 
 const HomePage = () => {
@@ -7,14 +8,16 @@ const HomePage = () => {
   
   return (
     <div>
+      
       <Link to='/new'>Crear nueva Tarea</Link>
-      <ul>
+      <div className='grid grid-cols-2 gap-4'>
         {
           post.map(item => (
-            <li key={item._id || 1}>{item.title}</li>
+            <PostCard post={item} key={item._id} />
           ))
         }
-      </ul>
+      </div>
+        
     </div>
   )
 }
