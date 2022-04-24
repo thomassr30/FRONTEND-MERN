@@ -5,7 +5,17 @@ export const getPostRequest = async () => {
 }
 
 export const createPostRequest = async (post) => {
-    return await axios.post('http://localhost:4000/posts', post)
+    const form  = new FormData
+
+    for(let key in post){
+        form.append(key, post[key]) 
+    }
+
+    return await axios.post('http://localhost:4000/posts', form, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    })
 }
 
 export const deletePostRequest = async (id) => {
@@ -16,6 +26,17 @@ export const getPostWithIdRequest = async (id) => {
     return await axios.get(`http://localhost:4000/posts/${id}`)
 }
 
-export const updatePostRequest = async (id, newData) => {
-    return await axios.put(`http://localhost:4000/posts/${id}`, newData)
+export const updatePostRequest = async (id, post) => {
+
+    const form  = new FormData
+
+    for(let key in post){
+        form.append(key, post[key]) 
+    }
+
+    return await axios.put(`http://localhost:4000/posts/${id}`, form, {
+        headers: {
+            "Content-Type": "multipart/form-data"
+        }
+    })
 }

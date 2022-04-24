@@ -48,7 +48,7 @@ export const PostProvider = ({children}) => {
 
     useEffect(() => {
         getPost()
-      }, [])
+      }, [post])
     
     return(
         <postContext.Provider
